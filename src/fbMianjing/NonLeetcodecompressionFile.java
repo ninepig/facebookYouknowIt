@@ -1,5 +1,7 @@
 package fbMianjing;
 
+import java.util.PriorityQueue;
+
 /**
  * Created by yangw on 2019/7/17.
  */
@@ -21,6 +23,24 @@ S= 30
 // 步骤如下：1）算出A中所有元素的加和cur_sum；
 // 2）while 循环判断cur_sum是否大于S，若是，则从最大堆中取出最大值m，cur_sum-=m
 
-
+public int minFileNumberToCompressFile(int[] A , int[] B , int k) {
+    if(A == null || A.length == 0 || B == null || B.length == 0 || A.length != B.length || k  <= 0) return -1;
+    // MaxHeap
+    PriorityQueue<Integer> pq = new PriorityQueue<>(A.length,(a,b)->(b - a ));
+    int curSum = 0;
+    for (int i = 0 ; i < A.length ; i++){
+        pq.offer(A[i]-B[i]);
+        curSum += A[i];
+    }
+    int res = 0;
+    while (curSum > k && !pq.isEmpty()){
+        curSum -= pq.poll();
+        res++;
+    }
+    if (curSum > k){
+        return -1;
+    }
+    return res;
+}
 
 }

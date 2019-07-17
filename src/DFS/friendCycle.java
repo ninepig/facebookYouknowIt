@@ -3,6 +3,8 @@ package DFS;
 /**
  * Created by yangw on 2019/7/2.
  * dfs is much better than bfs
+ * // Time complexity: O(n^2)
+ // Space complexity: O(n)
  */
 public class friendCycle {
     private void dfs(int[][] m, int[] visited, int studentNumber) {
@@ -27,5 +29,38 @@ public class friendCycle {
             }
         }
         return count;
+    }
+
+    public int findCircleNumUF(int[][] M) {
+        if (M == null || M.length == 0 || M.length != M[0].length) {
+            return 0;
+        }
+        int m = M.length;
+        int res = m;
+        int[] root = new int[m];
+        for (int i = 0; i < m; ++i) {
+            root[i] = i;
+        }
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < m; ++j) {
+                if (i != j && M[i][j] == 1) {
+                    int p1 = findRoot(root, i);
+                    int p2 = findRoot(root, j);
+                    if (p1 != p2) {
+                        --res;
+                        root[p2] = p1;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    private int findRoot(int[] root, int i) {
+        while (root[i] != i) {
+            root[i] = root[root[i]];
+            i = root[i];
+        }
+        return i;
     }
 }

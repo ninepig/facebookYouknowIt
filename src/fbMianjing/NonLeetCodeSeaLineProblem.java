@@ -11,12 +11,12 @@ public class NonLeetCodeSeaLineProblem {
  *
  * 用stack就行。从左往右扫。栈顶遇到高的就pop。遇到低的直接放入。最后栈里元素就是答案
  * /
-         Stack<Integer> stack = new Stack<>();                int i = 0;
-
+         Stack<Integer> stack = new Stack<>();
+            int i = 0;
          while (i < a.length) {
          if (stack.isEmpty() || a[stack.peek()] > a) {
          stack.push(i++);
-         } else {. 1point3acres
+         } else {
          while (!stack.isEmpty() && a[stack.peek()] <= a) {
          stack.pop();
          }
