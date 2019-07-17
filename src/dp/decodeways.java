@@ -48,6 +48,8 @@ public class decodeways {
     }
 
 
+
+
     int M = 1000000007;
     public int numDecodings2(String s) {
         long[] dp = new long[s.length() + 1];
